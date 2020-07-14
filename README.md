@@ -68,3 +68,77 @@
 | webpack-bundle-analyzer         | Generate report of what's in the app's production bundle         |
 | webpack-cli                     | Run Webpack via the command line                                 |
 | webpack-dev-server              | Serve app via Webpack                                            |
+
+<p>
+    <h2>An Introduction to Reducer in Javscript</h2><br>
+    Reducer is a javascript function which takes two aruguments 
+    <ul>
+        <li>State</li>
+        <li>Action</li>
+    </ul>
+    and return new state<br>
+    ex.<br>
+    <pre>
+        function counterReducer(state, action)
+        {
+            return state + 1;
+        }
+    </pre>
+    state may contains fields that use in the component<br>
+    action contains 
+    <ul>
+        <li>Type of operation</li>
+        <li>Payload</li>
+    </ul>
+    <br>
+    ex.<br>
+    <pre>
+        function counterReducer(state, action)
+        {
+            switch(action.type){
+                case "Increment":
+                    return "Increment";
+                case "Decreament":
+                    return "Degrement";
+                default:
+                    return state;
+            }
+        }
+        <br>
+        counterReducer(0, {type : "Increment"}); //1
+        counterReducer(1, {type : "degement"}); //0
+    </pre>
+    State may not be a simple premitive type but may be an object that contains many fields.<br>
+    ex.<br>
+    <pre>
+        function counterReducer(state, action){
+            switch(action.type){
+                case "Increment":
+                    return {...state, counter : state.counter + 1};
+                case "Degrement":
+                    return {...state, counter : state.counter - 1};
+                default:
+                    return state;
+            }
+        }
+        var result = counterReducer({id:1, name:"Newman", counter:1}, {type : "Increment"});
+    </pre>
+    <br>ex.<br>
+    <pre>
+        function counterReducer(state, action){
+            switch(action.type){
+                case "ChangeName":
+                    return {...state, name : action.payload.name};
+                case "ChaneEmail":
+                    return {...state, email : action.payload.email};
+                default:
+                    return state;
+            }
+        }
+        var result = counterReducer({id:1, name:"Newman", email:"test@test.com"}, {type : "ChangeName", payload : {}name:"Newman Croos", email : "newmancroos@gmail.com"});
+    </pre>
+</p>
+<p>
+    <h2>Redux Implementation</h2><br>
+    
+</p>
