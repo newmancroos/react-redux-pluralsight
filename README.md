@@ -146,16 +146,161 @@
     <p>
         There are three method to handling state across components
         <ul>
-        <li>
-            Lift State - Passing state from parent to the child using props
-        </li>
-        <li>
-            React Context  -  Using React context, provider and consumer
-        </li>
-        <li>
-            Redux - Has a centerlized Store and component connected with store can get the updated data and using action any component update the date in the store.<br>
-            <img src="./images/Redux.png" />
-        </li>
+            <li>
+                Lift State - Passing state from parent to the child using props
+            </li>
+            <li>
+                React Context  -  Using React context, provider and consumer
+            </li>
+            <li>
+                Redux - Has a centerlized Store and component connected with store can get the updated data and using action any component update the date in the store.<br>
+                <img src="./images/Redux.png" />
+            </li>
         </ul>
+    </p>
+    <p>
+        3 Priciples of Redux<br>
+        <ol>
+            <li>One Immutable Store</li>
+            <li>Actions trigger changes</li>
+            <li>Reducer update store</li>
+        </ol>
+        <br>
+        <h3><u>1.Action</u></h3><br>
+        Action has two properties,
+            <ol>
+                <li>type</li>
+                <li>Variables/Values</li>
+            </ol><br>
+        <b>Action creators</b> are plain javascript function that return <b>action</b><br>
+        <pre>
+            rateCourse(rating){
+                return {type: RATE_COURSE, rating:ratig}
+            }
+        </pre>
+        <h3><u>2.Store</u></h3><br>
+        <pre>let store = createStore(reducer);</pre><br>
+        Redux store follows single responsibility, that store state on it and react has only one store.<br>
+        <p>
+            A Store can<br>
+            <ul>
+                <li>
+                    Dispatch an action<br>
+                    <pre>
+                        store.dispatch(action);
+                    </pre>
+                </li>
+                <li>
+                    Subscribe to a listener<br>
+                    <pre>
+                        store.subscribe(listener);
+                    </pre>
+                </li>
+                <li>
+                    Return current state
+                    <pre>
+                        store.getState();
+                    </pre>
+                </li>
+                <li>
+                    Replace a reducer
+                    <pre>
+                        replaceReducer(nextReducer)
+                    </pre>
+                    it helps for hot reloading
+                </li>
+            </ul>
+            Only way to changing store is <b>dispatching an action.</b><br>
+        </p>
+        <p>
+            <i>What is Immutability?</i><br>
+                When you change the value of the object, a new copy of the object will be created and replce the existing. ex.: Number, String, Boolean, Undefined, Null <br>
+            then<i>What is Mutable</i><br>
+            We can directly change the value of the object, the same object will be modified with the new value
+                ex.: Object, Array, Function<br>
+        </p>
+        <p>
+            Example of Mutating a state<br>
+            <pre>
+                state = {
+                    name: 'Newman',
+                    rolw: 'Author
+                }
+                state.role = 'Admin'
+                return state;
+            </pre>
+            here I'm updating one of the property of the state that mean object get updated that is Mutating.
+        </p>
+        <p>
+            Example of Immutable, the same above example
+            <pre>
+                state = {
+                    name: 'Newman',
+                    role: 'Author
+                }
+                return state = {
+                    name: 'Newman',
+                    role: 'Admin'
+                };
+            </pre>
+            Here I'm sending a new object, is call Immutable.<br>
+            Redux depends on Imutable state to improve performance.
+        </p>
+        <p>
+            Sending entire state every time is really hard, because we need to know all the properties of the state, We have some javascrit technique to collect all the properties and update what we need.
+            <ul>
+                <li>
+                    <u>Assign</u><br>
+                    <b>Object.assign(target, ...source);</b><br>
+                    ex.:
+                        <pre>Object.assign({}, state, {role:'admin'});</pre><br>
+                        this return a object that contain all the properties of the state and updated property of role.
+                </li>
+                <li>
+                    <u>Spread Operator</u>
+                    ex.: const newState = {...state, role:'Admin'}<br>
+                    make an array of users from state object
+                    <pre>
+                        const newUserArray = [...state.users]
+                    </pre>
+                    <br>
+                    Warning: Spread operator will create shallow copy of the object.<br>
+                    ex.:
+                    <pre>
+                        const user = {
+                            name='Newman',
+                            address : {
+                                state:'Maryland'
+                            }
+                        }
+                    </pre>
+                    if you make any changes in address object then
+                    <pre>
+                        const userCopy = {...user, address:{...user.address}};
+                    </pre>
+                    if you are making any changes in child object should not clone that object. cloning nested object is making unneccasarry renders.<br>
+                    there is 3rd party tool to change nested object in immutable manner, called <b>Immer</b>
+                    ex.:<img src="./images/immer.png" /><br>
+                </li>
+                <li>
+                    <u>Array</u>
+                       There are array method that use Mutate way <br>
+                        ex.: push, pop, reverse  - these return updated array<br>
+                        we should use imutable arrays. ex:.<br>
+                        map, filter, reduce, concat, spread - these return new array
+                </li>
+            </ul>
+        </p>
+        <p>
+            Why Redux use Immutable state?<br>
+            <ul>
+                <li>Clarity - we know where from the state got updated (reducer)</li>
+                <li>Performance - Instead of checking each properties if it got change we can consider the state state changed even if a property changed, so we reduce the expensive operation of searching for change.</li>
+                <li>Awesome Sauce - Time travel on state changes</li>
+            </ul>
+        </p>
+        <p>
+            <h3><u>Reducers</u></h3>
+        </p>
     </p>
 </p>
