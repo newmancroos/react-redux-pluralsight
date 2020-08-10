@@ -301,6 +301,157 @@
         </p>
         <p>
             <h3><u>Reducers</u></h3>
+            <pre>
+                function myReducer(state, action){
+                    //Return new state based on the action passed.
+                }
+            </pre>
+            Example:
+            <pre>
+                function myReducer(state, action){
+                    swithch (action.type)
+                    {
+                        case "INCREMENT_COUNTER" :
+                            state.counter++;
+                            return state;
+                            break;
+                        default:
+                        return state;
+                    }
+                }
+            </pre>
+            but here the big mistake is we mutating the state, that is not allowed in Redux. So we change the example little bit diferent
+            <pre>
+                fimction myReducer(state, action){
+                    switch(action.type){
+                        case "INCREMENT_COUNTER":
+                            return {...state,counter: state.counter +1};
+                            break;
+                        default:
+                            return state;
+                    }
+                }
+            </pre>
+            In reducer we should not do the following actions
+            <ol>
+                <li>Mutate arguments</li>
+                <li>Perform side effects -  calling api</li>
+                <li>Call non-pure function - other function which has multi purpose and many tasks(Date.now, Math.random...)</li>
+            </ol>
+        </p>
+        <p>
+            in Redux, one store and multiple reduces we use also a particular action may involved in multiple reducers too.
+        </p>
+        <p>
+            <h5>Connect React and Redux</h5>
+            <p>
+                Redux has 2 importent components
+                <ul>
+                    <li>
+                        Container<br>
+                        <ul>
+                            <li>Focus on how things work</li>
+                            <li>Aware of Redux</li>
+                            <li>Subscribe to Redux state</li>
+                            <li>Dispatch Redux action</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Presentational<br>
+                        <ul>
+                            <li>Fous on how things look</li>
+                            <li>Unaware of Redux</li>
+                            <li>Read data from props</li>
+                            <li>Invoke callback on props</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+        </p>
+        <p>
+            We need to install <b>react-redux library</b> to start working on Redux. Redux is not only for react but also alll other javascript frameworks and library use it, ex.: Angular, Ember, Jquery....<br>
+            React-Redux has two items
+            <ul>
+                <li>Provider Component - attaches app to store</li>
+                <li>Connect Funtion - Create container components</li>
+            </ul><br>
+            <ul>
+                <li>
+                    <b>Provider Component</b> helps connect app with the store and it will use in the root of the application at once.
+                    <pre>
+                        <Provider store={this.props.store}>
+                            <App/>
+                        </Provider>
+                    </pre>
+                    Wrapping your app in the provider makes the Redux store accessible to every component  in your app.
+                </li>
+                <li>
+                    <b>Connect function</b> wraps our component so it's connected to Reduc store.
+                    <pre>
+                        export default connect(mapStateToProps, mapDispatcherToProps)(AuthorPage);
+                    </pre>
+                        first arugement - What state do you want to pass to your component?/ What part of the redux store expose the props to my component<br>
+                        second argument - What action do you want to pass to your component?
+                </li>
+            </ul>
+            <p>
+                <h3>mapDispatchToProps</h3>
+                There are 4 ways to handle mapDispatchToProps
+                <ol>
+                    <li>
+                        <u>Ignore it</u><br>
+                        <pre>
+                            //in component
+                            this.props.dispatch(loadCources()); //loadCources() is a action-creator
+                        </pre>
+                    </li>
+                    <li><u>Wrap manually</u><br>
+                        <pre>
+                            function mapDispatchToProps(dispatch){
+                                return{
+                                    loadCourses: () =>{
+                                        dispatch(loadCources());
+                                    },
+                                    createCourse: (course) =>{
+                                        dispatch(createCourse(course));
+                                    },
+                                    updateCourse: (course) =>{
+                                        dispatch(updateCourse(course));
+                                    }
+                                };
+                            }
+                        </pre>
+                    </li>
+                    <li>
+                        <u>BindActionCreator</u><br>
+                        <pre>
+                            function mapDispatchToProps(dispatch){
+                                return{
+                                    actions : bindActionCreators(actions, dispatch)
+                                    //Wrap action creators in dispatchcall for you
+                                };
+                            }
+                            //In component
+                            this.props.actions.loadCourses();
+                            //We have to call this.props.actions.loadCourses() not directly from props.
+                        </pre>
+                    </li>
+                    <li>
+                        <u>Return object</u><br>
+                        <pre>
+                            const mapDispatchToProps = {
+                                loadCourses
+                                //Wrapped in dispatch automatically
+                            };
+                            //In component
+                            this.props.loadCourses();
+                        </pre>
+                    </li>
+                </ol>
+            </p>
+            <p>
+            </p>
         </p>
     </p>
+
 </p>
