@@ -139,6 +139,23 @@
     </pre>
 </p>
 <p>
+    React Context and Provider/consumer???????
+</p>
+<p>
     <h2>Redux Implementation</h2><br>
-    
+    <p>
+        There are three method to handling state across components
+        <ul>
+        <li>
+            Lift State - Passing state from parent to the child using props
+        </li>
+        <li>
+            React Context  -  Using React context, provider and consumer
+        </li>
+        <li>
+            Redux - Has a centerlized Store and component connected with store can get the updated data and using action any component update the date in the store.<br>
+            <img src="./images/Redux.png" />
+        </li>
+        </ul>
+    </p>
 </p>
