@@ -332,6 +332,7 @@
                     }
                 }
             </pre>
+			<b>Each reducers handles a "slice" of the state(a portion of the entire Redux store)</b><br>
             In reducer we should not do the following actions
             <ol>
                 <li>Mutate arguments</li>
@@ -450,7 +451,32 @@
                 </ol>
             </p>
             <p>
+                <h3>Steps involved in Resdux in react world</h3><br>
+                In the initial setup : <br>
+                <ol>
+                    <li>Create action</li>
+                    <li>Create Reducer</li>
+                    <li>Create Root Reducer</li>
+                    <li>Configure Store</li>
+                    <li>Initiate Store</li>
+                    <li>Connect Component</li>
+                    <li>Pass props via connect</li>
+                    <li>Dispatch action</li>
+                </ol>
+                Once we setup, on going development<br>
+                <ol>
+                    <li>Create action</li>
+                    <li>Enhance Reducer</li>
+                    <li>Conect Component</li>
+                    <li>Dispatch action</li>
+                </ol>
             </p>
+            <p>
+				<h3>Middleware</h3><br>
+					Redux middleware is a way to enhance redux's behavior. to impliment any middleware we need to use Redux's "applyMiddleware"<br>
+					reduxImmutableStateInvariant - This will warn us if we accidentally mutate Redux state. we can specify this middleware when we creare the store.
+            </p>
+			
         </p>
     </p>
 
