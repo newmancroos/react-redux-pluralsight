@@ -13,7 +13,7 @@ module.exports = {
     //normally webpack put output in memory so ew need to define the output to a folder
     path: path.resolve(__dirname, "build"),
     publicPath: "/", //Specify this a root url when we use it in the browser
-    filename: "bundle.js"
+    filename: "bundle.js",
   },
   devServer: {
     stats: "minimal", //minimize the information writes in the command line when compile and run
@@ -21,13 +21,16 @@ module.exports = {
     historyApiFallback: true, //help to router to handler history and deep links
     disableHostCheck: true,
     headers: { "Access-Control-Allow-Origin": "*" },
-    https: false
+    https: false,
   },
   plugins: [
+    new webpack.DefinePlugin({
+      "process.env.API_URL": JSON.stringify("http://localhost:3001"),
+    }),
     new HtmlWebpackPlugin({
-      template: "src/index.html"
+      template: "src/index.html",
       //   favicon: "scr/favicon.ico"
-    })
+    }),
   ],
   module: {
     rules: [
@@ -35,14 +38,14 @@ module.exports = {
         //This is for Js and Jsx
         test: /\.(js|jsx)$/, //Compile all the file has extension js and jsx
         exclude: /node_modules/, // Exclude all the file in the node_module
-        use: ["babel-loader", "eslint-loader"] //Compile Jsx file using babel-loader. Its conver modern javascript to normal javascript so all the brwoders understands it.
+        use: ["babel-loader", "eslint-loader"], //Compile Jsx file using babel-loader. Its conver modern javascript to normal javascript so all the brwoders understands it.
       }, //ESLint anf its setting in the package.json file helps compiler to correctly throw the debug errors.
       {
         test: /(\.css)$/,
-        use: ["style-loader", "css-loader"]
-      }
-    ]
-  }
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
 };
 
 //Added Babel preset in package.json to tell babel to compile all Jsx like Spread,

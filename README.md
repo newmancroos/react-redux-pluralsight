@@ -476,7 +476,76 @@
 					Redux middleware is a way to enhance redux's behavior. to impliment any middleware we need to use Redux's "applyMiddleware"<br>
 					reduxImmutableStateInvariant - This will warn us if we accidentally mutate Redux state. we can specify this middleware when we creare the store.
             </p>
-			
+			<p>
+				<h3>Async Api calls using Redux</h3>
+				We have setup a JSON server that server some end point to get Course record. To configure JSON web server we haveadded tool folder and files and change the package.json-server
+				<pre>
+					"prestart:api": "node tools/createMockDb.js",
+					"start:api": "node tools/apiServer.js"
+				</pre>
+				<b>prestart : api</b> if you run any other api or site prestart wil run first. 
+				If you  run "npm run start:api" will create a copy of 	database called db.json and api will be running in port localhost:3001	<br>
+				We are going to use this api for our development. so when we run we have to  run our dev and api, so change the package.json script as followin
+				<pre>
+					    "start": "run-p start:dev start:api",//run-p will run servie parrell, here prestart will startautomatically
+						"start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3000",
+						"prestart:api": "node tools/createMockDb.js",
+						"start:api": "node tools/apiServer.js"
+				</pre>
+				We can configure constance within webpack file
+				<pre>
+					const webpack = require("webpack");
+					    new webpack.DefinePlugin({
+						  "process.env.API_URL": JSON.stringify("http://localhost:3001"),
+						}),
+				</pre>
+				so we can use the api url like
+				<pre>
+					const baseUrl = process.env.API_URL + "/courses/";
+				</pre>
+			</p>
+			<p>
+				<h3>Redux Middleware</h3>
+				Middleware run in between Dispatching a action and Reducer.
+				<img src="./images/redux-middleware.png" /><br>
+				<img src="./images/redux-custom-middleware.png /><br>
+				instead of writing custom middleware redux has its own middleware for our needs. <br>
+				in Redux actions are Synchronus and must return an object, then how can we handle async calls?????<br>
+				there are multiple library to handle asyn in redux, some are as follows, <br>
+				<ul>
+					<li>redux-thunk - Return functions from action creator</li>
+					<li>redux-promise - Use promises for async</li>
+					<li>redux-observable - Use RxJS observable</li>
+					<li>redux-saga - Use Generators</li>
+				</ul>
+			</p>
+			<p>
+				<h3>Thunk</h3>
+				Thunk is a function that return a function. To add Thunk to the redux store, in the configureStore, <b>import thunk from 'redux-thunk'</b> and add it to the middleware
+				<pre>
+					return createStore(
+						rootReducer,
+						initialState,
+						composeEnhancers(applyMiddleware(thunk, reduxImmutableStateInvariant()))
+					);
+				</pre>
+				<br>
+				and then in the courseAction create a function using thunk.
+				<pre>
+					export function loadCourses() {
+					  return function (dispatch) {
+						return CourseApi.getCourses()
+						  .then((courses) => {
+							dispatch(loadCoursesSuccess(courses));
+						  })
+						  .catch((error) => {
+							throw error;
+						  });
+					  };
+					}
+				</pre>
+				redux thunk inject idspatch so we don't have to.
+			</p>
         </p>
     </p>
 

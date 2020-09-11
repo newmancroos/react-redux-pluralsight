@@ -5,6 +5,7 @@ import AboutPage from "./about/AboutPage";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFount";
 import CoursesPage from "./Courses/CoursesPage";
+import CourseDetail from "./Courses/CourseDetail";
 function App() {
   return (
     <div className="container-fluid">
@@ -13,6 +14,7 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/about" component={AboutPage} />
         <Route exact path="/courses" component={CoursesPage} />
+        <Route exact path="/course/:bookname" component={CourseDetail} />
         <Route component={PageNotFound} />
       </Switch>
     </div>
