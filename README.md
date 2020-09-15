@@ -546,6 +546,30 @@
 				</pre>
 				redux thunk inject idspatch so we don't have to.
 			</p>
+			<p>
+				<h3>Hooks</h3>
+				A page that display a particular course detail so we can convert this class component to function component using Hooks.
+				What is Hooks? -> Hooks allow us to handle state and side effects(think life cycle methods) 
+				in functional component. Hooks only work on functional components.<br>
+				Hooks added to react in early 2019 with react 16.8. we use <b>useEffect</b>. useEffect will handle side effect and return a function. so instead of render method we can use useEffect.<br<
+				<b>useEffect</b> will run every time the component render, we need to stop this behavior. To stop it we have a second argument.
+				<pre>
+				useEffect(() => {
+					if (courses.length === 0) {
+					  loadCourses().catch((error) => {
+						alert("Loading courses faild" + error);
+					  });
+					}
+					if (authors.length === 0) {
+					  loadAuthors().catch((error) => {
+						alert("Loading authors faild" + error);
+					  });
+					}
+				  }, []);
+				  //This empty array as a second argument to effect mean the effect will run once when the component mount. it is same as <b>componentDidMount</b>.<br>
+				  <b>useState</b> is another Hooks util to add state funtionality to a functional component.
+				</pre>
+			</p>
         </p>
     </p>
 
