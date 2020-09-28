@@ -651,6 +651,7 @@
 			<pre>
 				import ManageCourcePage from './courses/ManageCourcePage';
 				import {ManageCourcePage} from './courses/ManageCourcePage';
+				
 			</pre>
 			the first one import default compponent instance and second one import the named component.<br>
 		</p>
