@@ -571,6 +571,89 @@
 				</pre>
 			</p>
         </p>
+		<p>
+			<h3>Testing React</h3>
+			We have wide verity of testing franework to test javascript library, some them are<br>
+			<ul>
+				<li>Jest (facebook)</li>
+				<li>Mocha</li>
+				<li>Jasmine</li>
+				<li>Tape</li>
+			</ul>
+			testing library makes the test esier, React testing Libraries are, <br>
+			<ul>
+				<li>React Test Utils(Facebook)</li>
+				<li>Enzyme</li>
+				<li>React testing library</li>
+			</ul>
+			<br>
+			React Test Utils provider two types of Rendering
+			<ul>
+				<li>
+					<b>ShallowRender</b><br>
+						<ul>
+							<li>Render signle coponent no children</li>
+							<li>No Dom Required</li>
+							<li>Fast and Simple</li>
+						</ul>
+				</li>
+				<li>
+					<b>RenderIntoDocument</b><br>
+					<ul>
+						<li>Render component and children</li>
+						<li>DOM Required</li>
+						<li>Supports simulating interactions</li>
+					</ul>
+				</li>
+			</ul>
+			React Test utils is little bit cranky to use for example, for <br>
+			findRenderedDOMComponentWithTag, scryRenderedDOMComponentWithTag, scryRenderedDOMComponentWithClass <br>
+			all same command in <b>Enzyme</b> is <b>find</b>, also <b>Enzyme</b> accepts CSS selectors, so if you know to write CSS, you know how to use this. Ensyme interannly usinf React Test utils that means Ensyme is the Abstraction of React test utils.
+		</p>
+		<p>	
+			<h4>Configure Jest </h4>
+			<ol>
+				<li>Add Command to run jest in package.json<br> <b>"test" : "jest"</li>
+			</ol>
+		</p>
+		<p>
+			Snapshot testing is the test the component output. It will create a snapshot file under the directory where component which are tested. Install Snapshot-tool extension will help to read shanp-shot file my hovering on the "toMatchSnapshot" function.
+		</p>
+		<p><br>
+		<h3>Tesing using Enzyme</h3><br>
+			For testing using Ensyme we need to configure Enzyme adaptor.<br> create testSetup.js under tools directory.
+			<pre>
+				import { configure } from "enzyme";
+				import Adapter from "enzyme-adapter-react-16"; //use appropreate adoptor to your react version
+				configure({ adapter: new Adapter() });
+			</pre>
+			and specify in package.json
+			<pre>
+				"jest": {
+					"setupFiles": [
+					  "./tools/testSetup.js"
+					]
+				  },
+			</pre>
+			<br>
+			there are two ways to render a React component for tesing in Enzyme,
+			<ol>
+				<li>shallow - Renders single component - No actual DOM will be created</li>
+				<li>mount - Renders component with children - DOM is created in memory via JSDOM</li>
+			</ol>
+		</p>
+		<p>
+			<h3>Test using React Test Libraries</h3><br>
+			It is alternative to Enzyme.<br>
+		</p>
+		<p>
+			There is a difference between the below two statements
+			<pre>
+				import ManageCourcePage from './courses/ManageCourcePage';
+				import {ManageCourcePage} from './courses/ManageCourcePage';
+			</pre>
+			the first one import default compponent instance and second one import the named component.<br>
+		</p>
     </p>
-
+	
 </p>
