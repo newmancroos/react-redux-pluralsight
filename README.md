@@ -651,10 +651,20 @@
 			<pre>
 				import ManageCourcePage from './courses/ManageCourcePage';
 				import {ManageCourcePage} from './courses/ManageCourcePage';
-				
 			</pre>
 			the first one import default compponent instance and second one import the named component.<br>
 		</p>
     </p>
-	
+	<p>
+		<h3>Production Build</h3><br>
+		<ul>
+			<li>Lint and runs tests</li>
+			<li>Bundle and minify JS and CSS</li>
+			<li>Generate JS and CSS sourcemaps</li>
+			<li>Exclude dev-specific concerns</li>
+			<li>Build React in production mode</li>
+			<li>Generate bundle report</li>
+			<li>Run the build on a local webserver</li>
+		</ul>
+	</p>
 </p>
